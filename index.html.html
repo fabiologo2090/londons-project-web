@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LONDON'S PROJECT - Todo Sobre Spray Foam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        /* Hero section background image styling */
+        .hero-spray-foam-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://i.postimg.cc/hjfmRNmy/hero-fondo-sprayfoam-jpg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax-like effect */
+        }
+
+        /* Logo image styling */
+        .logo-img {
+            max-height: 59px; /* Adjusted logo size */
+            transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+        }
+        .logo-img:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Sticky navigation bar styling */
+        .nav-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 50; /* Ensures nav stays on top */
+            background-color: rgba(255, 255, 255, 0.97); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+        }
+
+        /* Navigation link styling */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.375rem; /* rounded-md */
+        }
+        .nav-link::after { /* Animated underline effect */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0D9488; /* teal-600 */
+            transition: width 0.3s ease-in-out;
+        }
+        .nav-link:hover::after {
+            width: 70%; /* Underline expands on hover */
+        }
+        .nav-link:hover {
+            color: #0D9488; /* teal-600 */
+            background-color: rgba(13, 148, 136, 0.05); /* Very subtle background on hover */
+        }
+
+        /* Call to Action and Translate button styling */
+        .cta-button, .translate-button {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth custom transition */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .cta-button:hover, .translate-button:hover {
+            transform: translateY(-4px) scale(1.03); /* More pronounced lift and scale effect */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2); /* Enhanced shadow on hover */
+        }
+
+        /* Feature, Cell Type, and Application card styling */
+        .feature-card, .cell-type-card, .application-card {
+            transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out;
+        }
+        .feature-card:hover, .cell-type-card:hover, .application-card:hover {
+            transform: translateY(-12px) scale(1.03); /* Increased lift and scale */
+            box-shadow: 0 18px 35px rgba(0,0,0,0.15); /* Deeper shadow for more pop */
+        }
+
+        /* Eco-friendly icon styling */
+        .eco-friendly-icon {
+            color: #10B981; /* emerald-500 */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Playful bounce effect */
+        }
+        .eco-friendly-icon-container:hover .eco-friendly-icon { /* Target icon on container hover */
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Scroll animation styling */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px); /* Start slightly lower for animation */
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0); /* Animate to original position */
+        }
+
+        /* Form input focus styling */
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #14B8A6; /* teal-500 */
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.4); /* Softer focus ring */
+            outline: none;
+        }
+
+        /* Back to Top button styling */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: none; /* Hidden by default */
+            background-color: #14B8A6; /* teal-500 */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px; /* Slightly larger */
+            height: 50px;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        #backToTopBtn:hover {
+            background-color: #0D9488; /* teal-600 */
+            transform: scale(1.12) rotate(5deg); /* More dynamic hover */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="nav-sticky p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#hero-spray-foam" class="flex items-center space-x-3">
+                <img src="https://i.postimg.cc/mrd9qTP1/Logo-Londons-project-jpg.jpg" alt="LONDON'S PROJECT Logo" class="logo-img rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/59x59/CCCCCC/FFFFFF?text=Logo';">
+                <span class="text-xl md:text-2xl font-bold text-teal-700" data-lang-es="LONDON'S PROJECT" data-lang-en="LONDON'S PROJECT">LONDON'S PROJECT</span>
+            </a>
+            <div class="hidden md:flex space-x-3 items-center">
+                <a href="#hero-spray-foam" class="nav-link text-gray-600 font-medium" data-lang-es="Inicio" data-lang-en="Home">Inicio</a>
+                <a href="#what-is-spray-foam" class="nav-link text-gray-600 font-medium" data-lang-es="¿Qué es?" data-lang-en="What is it?">¿Qué es?</a>
+                <a href="#cell-types" class="nav-link text-gray-600 font-medium" data-lang-es="Tipos" data-lang-en="Types">Tipos</a>
+                <a href="#applications" class="nav-link text-gray-600 font-medium" data-lang-es="Usos" data-lang-en="Uses">Usos</a>
+                <a href="#eco-friendly" class="nav-link text-gray-600 font-medium" data-lang-es="Eco" data-lang-en="Eco">Eco</a>
+                <a href="#contact-spray-foam" class="nav-link text-gray-600 font-medium" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a>
+                <button id="translateBtnDesktop" class="translate-button bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold py-2 px-4 rounded-md">
+                    Translate to English
+                </button>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="translateBtnMobileToggle" class="translate-button bg-teal-500 hover:bg-teal-600 text-white text-xs font-semibold py-2 px-3 rounded-md mr-2">
+                    EN
+                </button>
+                <button id="mobileMenuBtnSprayFoam" class="text-gray-600 hover:text-teal-600 focus:outline-none p-2">
+                    <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenuSprayFoam" class="hidden md:hidden mt-2 py-2 bg-white rounded-lg shadow-xl">
+            <a href="#hero-spray-foam" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600" data-lang-es="Inicio" data-lang-en="Home">Inicio</a>
+            <a href="#what-is-spray-foam" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600" data-lang-es="¿Qué es Spray Foam?" data-lang-en="What is Spray Foam?">¿Qué es Spray Foam?</a>
+            <a href="#cell-types" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600" data-lang-es="Tipos de Celda" data-lang-en="Cell Types">Tipos de Celda</a>
+            <a href="#applications" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600" data-lang-es="Usos del Spray Foam" data-lang-en="Spray Foam Uses">Usos del Spray Foam</a>
+            <a href="#eco-friendly" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600" data-lang-es="Eco-Amigable" data-lang-en="Eco-Friendly">Eco-Amigable</a>
+            <a href="#contact-spray-foam" class="block px-4 py-3 text-sm text-gray-700 hover:bg-teal-50 hover:text-teal-600" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a>
+        </div>
+    </nav>
+
+    <header id="hero-spray-foam" class="hero-spray-foam-bg text-white py-24 md:py-36">
+        <div class="container mx-auto text-center px-4 animate-on-scroll">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6" data-lang-es="Descubre el Poder del Aislamiento con Spray Foam" data-lang-en="Discover the Power of Spray Foam Insulation">Descubre el Poder del Aislamiento con Spray Foam</h1>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto" data-lang-es="La solución moderna, eficiente y ecológica para un confort superior y ahorro energético en tu propiedad." data-lang-en="The modern, efficient, and eco-friendly solution for superior comfort and energy savings in your property.">La solución moderna, eficiente y ecológica para un confort superior y ahorro energético en tu propiedad.</p>
+            <a href="#contact-spray-foam" class="cta-button bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-10 rounded-lg text-lg shadow-lg" data-lang-es="Solicita tu Evaluación Gratuita" data-lang-en="Request Your Free Evaluation">Solicita tu Evaluación Gratuita</a>
+        </div>
+    </header>
+
+    <section id="what-is-spray-foam" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-700 mb-5" data-lang-es="¿Qué es el Spray Foam?" data-lang-en="What is Spray Foam?">¿Qué es el Spray Foam?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed" data-lang-es="El aislamiento con Spray Foam (espuma de poliuretano proyectada) es un material aislante de alto rendimiento que se aplica en estado líquido y se expande hasta convertirse en una espuma sólida, creando un sello hermético y continuo que se adapta a cualquier superficie." data-lang-en="Spray Foam insulation (sprayed polyurethane foam) is a high-performance insulating material that is applied as a liquid and expands into a solid foam, creating an airtight and continuous seal that conforms to any surface.">El aislamiento con Spray Foam (espuma de poliuretano proyectada) es un material aislante de alto rendimiento que se aplica en estado líquido y se expande hasta convertirse en una espuma sólida, creando un sello hermético y continuo que se adapta a cualquier superficie.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-lg animate-on-scroll">
+                    <div class="flex items-center justify-center mb-5">
+                        <svg class="h-14 w-14 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center" data-lang-es="Eficiencia Energética Superior" data-lang-en="Superior Energy Efficiency">Eficiencia Energética Superior</h3>
+                    <p class="text-gray-600 text-sm text-center leading-relaxed" data-lang-es="Reduce drásticamente las pérdidas de calor y frío, disminuyendo tus facturas de energía significativamente." data-lang-en="Drastically reduces heat and cold loss, significantly lowering your energy bills.">Reduce drásticamente las pérdidas de calor y frío, disminuyendo tus facturas de energía significativamente.</p>
+                </div>
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-lg animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="flex items-center justify-center mb-5">
+                         <svg class="h-14 w-14 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m0 6H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center" data-lang-es="Sello Hermético Completo" data-lang-en="Complete Airtight Seal">Sello Hermético Completo</h3>
+                    <p class="text-gray-600 text-sm text-center leading-relaxed" data-lang-es="Elimina corrientes de aire, infiltraciones de polvo, polen y humedad, mejorando la calidad del aire interior y el confort." data-lang-en="Eliminates drafts, infiltrations of dust, pollen, and moisture, improving indoor air quality and comfort.">Elimina corrientes de aire, infiltraciones de polvo, polen y humedad, mejorando la calidad del aire interior y el confort.</p>
+                </div>
+                <div class="feature-card bg-gray-50 p-8 rounded-xl shadow-lg animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="flex items-center justify-center mb-5">
+                        <svg class="h-14 w-14 text-teal-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center" data-lang-es="Larga Durabilidad" data-lang-en="Long Durability">Larga Durabilidad</h3>
+                    <p class="text-gray-600 text-sm text-center leading-relaxed" data-lang-es="No se asienta, encoge ni degrada con el tiempo, ofreciendo una solución de aislamiento para toda la vida útil de tu edificio." data-lang-en="Does not settle, shrink, or degrade over time, offering an insulation solution for the entire lifespan of your building.">No se asienta, encoge ni degrada con el tiempo, ofreciendo una solución de aislamiento para toda la vida útil de tu edificio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cell-types" class="py-16 md:py-24 bg-teal-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-teal-800 mb-16 text-center animate-on-scroll" data-lang-es="Spray Foam: Celda Abierta vs. Celda Cerrada" data-lang-en="Spray Foam: Open Cell vs. Closed Cell">Spray Foam: Celda Abierta vs. Celda Cerrada</h2>
+            <div class="grid md:grid-cols-2 gap-10 lg:gap-14 items-stretch">
+                <div class="cell-type-card bg-white p-8 rounded-xl shadow-xl animate-on-scroll flex flex-col">
+                    <div class="flex items-center mb-5">
+                        <svg class="h-12 w-12 text-teal-600 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" /> </svg>
+                        <h3 class="text-2xl font-semibold text-teal-700" data-lang-es="Espuma de Celda Abierta" data-lang-en="Open Cell Foam">Espuma de Celda Abierta</h3>
+                    </div>
+                    <p class="text-gray-700 mb-5 leading-relaxed flex-grow" data-lang-es="Ligera y flexible, la espuma de celda abierta se expande significativamente, llenando todas las cavidades. Es excelente para el aislamiento acústico y permite que la estructura &quot;respire&quot;, facilitando el secado si hay humedad." data-lang-en="Lightweight and flexible, open-cell foam expands significantly, filling all cavities. It is excellent for sound insulation and allows the structure to &quot;breathe,&quot; facilitating drying if moisture is present.">Ligera y flexible, la espuma de celda abierta se expande significativamente, llenando todas las cavidades. Es excelente para el aislamiento acústico y permite que la estructura "respire", facilitando el secado si hay humedad.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 text-sm mb-6">
+                        <li data-lang-es="Valor R aproximado: 3.5 - 4.0 por pulgada." data-lang-en="Approximate R-Value: 3.5 - 4.0 per inch.">Valor R aproximado: 3.5 - 4.0 por pulgada.</li>
+                        <li data-lang-es="Permeable al vapor de agua." data-lang-en="Permeable to water vapor.">Permeable al vapor de agua.</li>
+                        <li data-lang-es="Excelente barrera de aire y aislamiento acústico." data-lang-en="Excellent air barrier and sound insulation.">Excelente barrera de aire y aislamiento acústico.</li>
+                        <li data-lang-es="Ideal para paredes interiores, áticos ventilados y techos." data-lang-en="Ideal for interior walls, vented attics, and ceilings.">Ideal para paredes interiores, áticos ventilados y techos.</li>
+                        <li data-lang-es="Opción más económica." data-lang-en="More economical option.">Opción más económica.</li>
+                    </ul>
+                    <img src="https://i.postimg.cc/W3HMDsjc/Open-cell.webp" alt="Estructura microscópica de espuma de celda abierta" class="mt-auto rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x350/CCCCCC/FFFFFF?text=Imagen+Celda+Abierta+no+disponible';">
+                </div>
+                <div class="cell-type-card bg-white p-8 rounded-xl shadow-xl animate-on-scroll flex flex-col" style="transition-delay: 0.1s;">
+                    <div class="flex items-center mb-5">
+                         <svg class="h-12 w-12 text-teal-600 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8zM5 12h14" /> </svg>
+                        <h3 class="text-2xl font-semibold text-teal-700" data-lang-es="Espuma de Celda Cerrada" data-lang-en="Closed Cell Foam">Espuma de Celda Cerrada</h3>
+                    </div>
+                    <p class="text-gray-700 mb-5 leading-relaxed flex-grow" data-lang-es="Densa y rígida, la espuma de celda cerrada ofrece un mayor valor R por pulgada y actúa como barrera de vapor. Añade rigidez estructural y es altamente resistente al agua y la humedad." data-lang-en="Dense and rigid, closed-cell foam offers a higher R-value per inch and acts as a vapor barrier. It adds structural rigidity and is highly resistant to water and moisture.">Densa y rígida, la espuma de celda cerrada ofrece un mayor valor R por pulgada y actúa como barrera de vapor. Añade rigidez estructural y es altamente resistente al agua y la humedad.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 text-sm mb-6">
+                        <li data-lang-es="Valor R aproximado: 6.0 - 7.5 por pulgada." data-lang-en="Approximate R-Value: 6.0 - 7.5 per inch.">Valor R aproximado: 6.0 - 7.5 por pulgada.</li>
+                        <li data-lang-es="Impermeable al vapor de agua (barrera de vapor)." data-lang-en="Impermeable to water vapor (vapor barrier).">Impermeable al vapor de agua (barrera de vapor).</li>
+                        <li data-lang-es="Excelente barrera de aire y agua." data-lang-en="Excellent air and water barrier.">Excelente barrera de aire y agua.</li>
+                        <li data-lang-es="Ideal para cimientos, sótanos, paredes exteriores y zonas propensas a la humedad." data-lang-en="Ideal for foundations, basements, exterior walls, and moisture-prone areas.">Ideal para cimientos, sótanos, paredes exteriores y zonas propensas a la humedad.</li>
+                        <li data-lang-es="Aporta rigidez estructural al edificio." data-lang-en="Adds structural rigidity to the building.">Aporta rigidez estructural al edificio.</li>
+                    </ul>
+                    <img src="https://i.postimg.cc/jjC6RW04/closed-cell.webp" alt="Estructura microscópica de espuma de celda cerrada" class="mt-auto rounded-lg shadow-md w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x350/CCCCCC/FFFFFF?text=Imagen+Celda+Cerrada+no+disponible';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-700 mb-5" data-lang-es="Aplicaciones Versátiles del Spray Foam" data-lang-en="Versatile Spray Foam Applications">Aplicaciones Versátiles del Spray Foam</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed" data-lang-es="Gracias a sus extraordinarias propiedades, el spray foam se utiliza en una amplia gama de aplicaciones, ofreciendo soluciones eficientes y duraderas." data-lang-en="Thanks to its extraordinary properties, spray foam is used in a wide range of applications, offering efficient and durable solutions.">Gracias a sus extraordinarias propiedades, el spray foam se utiliza en una amplia gama de aplicaciones, ofreciendo soluciones eficientes y duraderas.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="application-card bg-gray-50 p-8 rounded-xl shadow-lg animate-on-scroll">
+                    <div class="flex items-center justify-center mb-5">
+                        <svg class="h-14 w-14 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center" data-lang-es="Aislamiento Residencial" data-lang-en="Residential Insulation">Aislamiento Residencial</h3>
+                    <p class="text-gray-600 text-sm text-center leading-relaxed mb-4" data-lang-es="Maximiza el confort y la eficiencia energética en tu hogar. El spray foam es ideal para:" data-lang-en="Maximize comfort and energy efficiency in your home. Spray foam is ideal for:">Maximiza el confort y la eficiencia energética en tu hogar. El spray foam es ideal para:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 text-sm mx-auto text-left max-w-xs">
+                        <li data-lang-es="Áticos y entretechos" data-lang-en="Attics and crawl spaces">Áticos y entretechos</li>
+                        <li data-lang-es="Paredes (interiores y exteriores)" data-lang-en="Walls (interior and exterior)">Paredes (interiores y exteriores)</li>
+                        <li data-lang-es="Sótanos y cimientos" data-lang-en="Basements and foundations">Sótanos y cimientos</li>
+                        <li data-lang-es="Suelos y voladizos" data-lang-en="Floors and cantilevers">Suelos y voladizos</li>
+                        <li data-lang-es="Garajes y talleres" data-lang-en="Garages and workshops">Garajes y talleres</li>
+                    </ul>
+                </div>
+                <div class="application-card bg-gray-50 p-8 rounded-xl shadow-lg animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="flex items-center justify-center mb-5">
+                        <svg class="h-14 w-14 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center" data-lang-es="Aislamiento Comercial e Industrial" data-lang-en="Commercial & Industrial Insulation">Aislamiento Comercial e Industrial</h3>
+                    <p class="text-gray-600 text-sm text-center leading-relaxed mb-4" data-lang-es="Optimiza costos operativos y crea ambientes controlados en edificios y naves industriales:" data-lang-en="Optimize operating costs and create controlled environments in buildings and industrial warehouses:">Optimiza costos operativos y crea ambientes controlados en edificios y naves industriales:</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 text-sm mx-auto text-left max-w-xs">
+                        <li data-lang-es="Edificios de oficinas y tiendas" data-lang-en="Office buildings and retail stores">Edificios de oficinas y tiendas</li>
+                        <li data-lang-es="Naves industriales y almacenes" data-lang-en="Industrial warehouses and storage facilities">Naves industriales y almacenes</li>
+                        <li data-lang-es="Cámaras frigoríficas y de congelación" data-lang-en="Cold storage and freezer rooms">Cámaras frigoríficas y de congelación</li>
+                        <li data-lang-es="Edificios agrícolas (granjas, establos)" data-lang-en="Agricultural buildings (barns, stables)">Edificios agrícolas (granjas, establos)</li>
+                        <li data-lang-es="Techos metálicos y de hormigón" data-lang-en="Metal and concrete roofs">Techos metálicos y de hormigón</li>
+                    </ul>
+                </div>
+                <div class="application-card bg-gray-50 p-8 rounded-xl shadow-lg animate-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="flex items-center justify-center mb-5">
+                         <svg class="h-14 w-14 text-emerald-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center" data-lang-es="Otros Usos y Aplicaciones Especiales" data-lang-en="Other Uses & Special Applications">Otros Usos y Aplicaciones Especiales</h3>
+                    <p class="text-gray-600 text-sm text-center leading-relaxed mb-4" data-lang-es="La versatilidad del spray foam permite su uso en proyectos únicos y especializados:" data-lang-en="The versatility of spray foam allows its use in unique and specialized projects:">La versatilidad del spray foam permite su uso en proyectos únicos y especializados:</p>
+                     <ul class="list-disc list-inside text-gray-600 space-y-1 text-sm mx-auto text-left max-w-xs">
+                        <li data-lang-es="Aislamiento de tuberías y tanques" data-lang-en="Pipe and tank insulation">Aislamiento de tuberías y tanques</li>
+                        <li data-lang-es="Vehículos recreativos (RVs) y barcos" data-lang-en="Recreational vehicles (RVs) and boats">Vehículos recreativos (RVs) y barcos</li>
+                        <li data-lang-es="Contenedores marítimos modificados" data-lang-en="Modified shipping containers">Contenedores marítimos modificados</li>
+                        <li data-lang-es="Estudios de grabación y teatros en casa" data-lang-en="Recording studios and home theaters">Estudios de grabación y teatros en casa</li>
+                        <li data-lang-es="Proyectos de arte y escenografía" data-lang-en="Art projects and scenography">Proyectos de arte y escenografía</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="eco-friendly" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="animate-on-scroll">
+                    <img src="https://i.postimg.cc/dVjr22vB/casa-eficiente.jpg" alt="LONDON'S PROJECT - Aislamiento Ecológico y Sostenible" class="rounded-xl shadow-xl w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x500/CCCCCC/FFFFFF?text=Imagen+Ecol%C3%B3gica+no+disponible';">
+                </div>
+                <div class="animate-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="flex items-center mb-4 eco-friendly-icon-container">
+                        <svg class="h-12 w-12 eco-friendly-icon mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7.014A7.962 7.962 0 0112 2c2.295 0 4.51.905 6.132 2.506C20.945 6.435 21.5 9.218 21.5 12c0 2.782-.555 5.565-1.868 7.494A8.008 8.008 0 0117.657 18.657zM9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+                        </svg>
+                        <h2 class="text-3xl md:text-4xl font-bold text-emerald-600" data-lang-es="Comprometidos con el Medio Ambiente" data-lang-en="Committed to the Environment">Comprometidos con el Medio Ambiente</h2>
+                    </div>
+                    <p class="text-gray-700 mb-5 leading-relaxed" data-lang-es="En LONDON'S PROJECT, no solo nos preocupamos por tu confort, sino también por el planeta. El Spray Foam es una opción de aislamiento sostenible que contribuye a un futuro más verde:" data-lang-en="At LONDON'S PROJECT, we care not only about your comfort but also about the planet. Spray Foam is a sustainable insulation option that contributes to a greener future:">En LONDON'S PROJECT, no solo nos preocupamos por tu confort, sino también por el planeta. El Spray Foam es una opción de aislamiento sostenible que contribuye a un futuro más verde:</p>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li class="flex items-start"><svg class="h-5 w-5 text-emerald-500 mr-2 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span data-lang-es="<strong>Reducción de la Huella de Carbono:</strong> Al mejorar drásticamente la eficiencia energética, se consume menos energía para climatización, disminuyendo las emisiones de gases de efecto invernadero." data-lang-en="<strong>Carbon Footprint Reduction:</strong> By drastically improving energy efficiency, less energy is consumed for HVAC, reducing greenhouse gas emissions."><strong>Reducción de la Huella de Carbono:</strong> Al mejorar drásticamente la eficiencia energética, se consume menos energía para climatización, disminuyendo las emisiones de gases de efecto invernadero.</span></li>
+                        <li class="flex items-start"><svg class="h-5 w-5 text-emerald-500 mr-2 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span data-lang-es="<strong>Materiales Duraderos y Longevos:</strong> Su larga vida útil significa menos necesidad de reemplazos y, por lo tanto, menos residuos en vertederos." data-lang-en="<strong>Durable and Long-lasting Materials:</strong> Its long lifespan means less need for replacements and therefore less landfill waste."><strong>Materiales Duraderos y Longevos:</strong> Su larga vida útil significa menos necesidad de reemplazos y, por lo tanto, menos residuos en vertederos.</span></li>
+                        <li class="flex items-start"><svg class="h-5 w-5 text-emerald-500 mr-2 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span data-lang-es="<strong>Fórmulas Modernas y Seguras:</strong> Utilizamos espumas con agentes expansores de bajo Potencial de Calentamiento Global (GWP), minimizando el impacto ambiental directo." data-lang-en="<strong>Modern and Safe Formulas:</strong> We use foams with low Global Warming Potential (GWP) blowing agents, minimizing direct environmental impact."><strong>Fórmulas Modernas y Seguras:</strong> Utilizamos espumas con agentes expansores de bajo Potencial de Calentamiento Global (GWP), minimizando el impacto ambiental directo.</span></li>
+                        <li class="flex items-start"><svg class="h-5 w-5 text-emerald-500 mr-2 mt-1 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg><span data-lang-es="<strong>Mejora de la Calidad del Aire Interior:</strong> Al sellar eficazmente la envolvente del edificio, se reduce la entrada de contaminantes externos y alérgenos." data-lang-en="<strong>Improved Indoor Air Quality:</strong> By effectively sealing the building envelope, the entry of external pollutants and allergens is reduced."><strong>Mejora de la Calidad del Aire Interior:</strong> Al sellar eficazmente la envolvente del edificio, se reduce la entrada de contaminantes externos y alérgenos.</span></li>
+                    </ul>
+                    <p class="text-gray-700 font-semibold text-lg" data-lang-es="Elegir Spray Foam con LONDON'S PROJECT es una inversión inteligente para tu confort, tu bolsillo y para un futuro más sostenible." data-lang-en="Choosing Spray Foam with LONDON'S PROJECT is a smart investment for your comfort, your wallet, and a more sustainable future.">Elegir Spray Foam con LONDON'S PROJECT es una inversión inteligente para tu confort, tu bolsillo y para un futuro más sostenible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-spray-foam" class="py-16 md:py-24 bg-teal-700 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center animate-on-scroll" data-lang-es="¿Listo para Mejorar tu Aislamiento?" data-lang-en="Ready to Improve Your Insulation?">¿Listo para Mejorar tu Aislamiento?</h2>
+            <p class="text-lg text-center mb-12 max-w-xl mx-auto animate-on-scroll" style="transition-delay: 0.05s;" data-lang-es="Contacta con LONDON'S PROJECT hoy mismo para una consulta gratuita y descubre cómo el Spray Foam puede transformar tu propiedad." data-lang-en="Contact LONDON'S PROJECT today for a free consultation and discover how Spray Foam can transform your property.">Contacta con LONDON'S PROJECT hoy mismo para una consulta gratuita y descubre cómo el Spray Foam puede transformar tu propiedad.</p>
+            <div class="max-w-2xl mx-auto bg-white text-gray-800 p-8 sm:p-10 md:p-12 rounded-xl shadow-2xl animate-on-scroll" style="transition-delay: 0.1s;">
+                <form action="#" method="POST">
+                    <div class="grid sm:grid-cols-2 gap-x-6 gap-y-5 mb-5">
+                        <div>
+                            <label for="sf-name" class="block text-sm font-medium text-gray-700 mb-1" data-lang-es="Nombre Completo" data-lang-en="Full Name">Nombre Completo</label>
+                            <input type="text" name="sf-name" id="sf-name" required class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none sm:text-sm" placeholder="Tu Nombre" data-lang-es-placeholder="Tu Nombre" data-lang-en-placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label for="sf-email" class="block text-sm font-medium text-gray-700 mb-1" data-lang-es="Correo Electrónico" data-lang-en="Email Address">Correo Electrónico</label>
+                            <input type="email" name="sf-email" id="sf-email" required class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none sm:text-sm" placeholder="tu@email.com" data-lang-es-placeholder="tu@email.com" data-lang-en-placeholder="you@email.com">
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label for="sf-phone" class="block text-sm font-medium text-gray-700 mb-1" data-lang-es="Teléfono (Opcional)" data-lang-en="Phone (Optional)">Teléfono (Opcional)</label>
+                        <input type="tel" name="sf-phone" id="sf-phone" class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none sm:text-sm" placeholder="Tu número de teléfono" data-lang-es-placeholder="Tu número de teléfono" data-lang-en-placeholder="Your phone number">
+                    </div>
+                    <div class="mb-6">
+                        <label for="sf-message" class="block text-sm font-medium text-gray-700 mb-1" data-lang-es="Mensaje" data-lang-en="Message">Mensaje</label>
+                        <textarea name="sf-message" id="sf-message" rows="5" required class="mt-1 block w-full px-4 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none sm:text-sm" placeholder="Describe tu proyecto o consulta..." data-lang-es-placeholder="Describe tu proyecto o consulta..." data-lang-en-placeholder="Tell us about your project or inquiry..."></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-lg text-lg cta-button" data-lang-es="Enviar Consulta Ahora" data-lang-en="Send Inquiry Now">
+                            Enviar Consulta Ahora
+                        </button>
+                    </div>
+                </form>
+                 <div class="mt-10 text-center">
+                    <p class="text-gray-600" data-lang-es="O contáctanos directamente:" data-lang-en="Or contact us directly:">O contáctanos directamente:</p>
+                    <p class="text-teal-600 font-semibold mt-2 text-lg hover:text-teal-700 transition-colors"><a href="tel:609-405-4232" data-lang-es="Teléfono: 609-405-4232" data-lang-en="Phone: 609-405-4232">Teléfono: 609-405-4232</a></p>
+                    <p class="text-teal-600 font-semibold text-lg hover:text-teal-700 transition-colors"><a href="mailto:londonsproject2090@gmail.com" data-lang-es="Email: londonsproject2090@gmail.com" data-lang-en="Email: londonsproject2090@gmail.com">Email: londonsproject2090@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-5 animate-on-scroll">
+                <a href="#hero-spray-foam" class="flex items-center justify-center space-x-3 mb-4">
+                     <img src="https://i.postimg.cc/mrd9qTP1/Logo-Londons-project-jpg.jpg" alt="LONDON'S PROJECT Logo" class="logo-img rounded-full border-2 border-teal-500" onerror="this.onerror=null;this.src='https://placehold.co/59x59/CCCCCC/FFFFFF?text=Logo';">
+                    <span class="text-xl font-semibold text-white" data-lang-es="LONDON'S PROJECT" data-lang-en="LONDON'S PROJECT">LONDON'S PROJECT</span>
+                </a>
+            </div>
+            <p class="text-sm mb-2 animate-on-scroll" style="transition-delay: 0.05s;">&copy; <span id="currentYearSprayFoam"></span> <span data-lang-es="LONDON'S PROJECT. Todos los derechos reservados." data-lang-en="LONDON'S PROJECT. All rights reserved.">LONDON'S PROJECT. Todos los derechos reservados.</span></p>
+            <p class="text-xs animate-on-scroll" style="transition-delay: 0.1s;" data-lang-es="Expertos en Aislamiento con Spray Foam de Alta Calidad" data-lang-en="Experts in High-Quality Spray Foam Insulation">Expertos en Aislamiento con Spray Foam de Alta Calidad</p>
+            </div>
+    </footer>
+
+    <button id="backToTopBtn" title="Volver arriba">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 mx-auto my-3"> <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </button>
+
+    <script>
+        // Function to set the current year in the footer
+        function setCurrentYear() {
+            const yearElement = document.getElementById('currentYearSprayFoam');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
+
+        // Function to handle scroll-triggered animations
+        function initScrollAnimations() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            if (!animatedElements.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: Unobserve after animation to save resources
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+            animatedElements.forEach(el => observer.observe(el));
+        }
+
+        // Function to handle mobile menu toggle
+        function initMobileMenu() {
+            const menuButton = document.getElementById('mobileMenuBtnSprayFoam');
+            const mobileMenu = document.getElementById('mobileMenuSprayFoam');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    // Optional: Add ARIA attributes for accessibility
+                    const isExpanded = mobileMenu.classList.contains('hidden') ? 'false' : 'true';
+                    menuButton.setAttribute('aria-expanded', isExpanded);
+                });
+
+                // Close mobile menu when a navigation link inside it is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        menuButton.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        }
+
+        // Function to handle "Back to Top" button visibility and functionality
+        function initBackToTopButton() {
+            const button = document.getElementById('backToTopBtn');
+            if (!button) return;
+
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                    button.style.display = "block";
+                    setTimeout(() => button.style.opacity = "1", 10); // Fade in
+                } else {
+                    button.style.opacity = "0"; // Fade out
+                    setTimeout(() => {
+                        if (button.style.opacity === "0") {
+                            button.style.display = "none"; // Hide after fade out
+                        }
+                    }, 300); // Match CSS transition time
+                }
+            });
+
+            button.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Translation logic
+        let currentLanguage = document.documentElement.lang || 'es'; // Default to HTML lang or Spanish
+        const elementsToTranslate = document.querySelectorAll('[data-lang-es]');
+
+        function translatePage(targetLang) {
+            if (!elementsToTranslate.length) return;
+
+            elementsToTranslate.forEach(el => {
+                const textKey = targetLang === 'en' ? 'data-lang-en' : 'data-lang-es';
+                const placeholderKey = targetLang === 'en' ? 'data-lang-en-placeholder' : 'data-lang-es-placeholder';
+                
+                const text = el.getAttribute(textKey);
+                const placeholderText = el.getAttribute(placeholderKey);
+
+                if (placeholderText) {
+                    el.placeholder = placeholderText;
+                } else if (text) {
+                    // Preserve HTML within translated strings if the original attribute contained it
+                    if (el.getAttribute(textKey).includes('<') && el.getAttribute(textKey).includes('>')) {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+            currentLanguage = targetLang;
+            document.documentElement.lang = targetLang; // Update HTML lang attribute
+
+            // Update translation button texts
+            const translateBtnDesktop = document.getElementById('translateBtnDesktop');
+            const translateBtnMobile = document.getElementById('translateBtnMobileToggle');
+
+            if (targetLang === 'en') {
+                if (translateBtnDesktop) translateBtnDesktop.textContent = 'Traducir a Español';
+                if (translateBtnMobile) translateBtnMobile.textContent = 'ES';
+            } else {
+                if (translateBtnDesktop) translateBtnDesktop.textContent = 'Translate to English';
+                if (translateBtnMobile) translateBtnMobile.textContent = 'EN';
+            }
+        }
+
+        function initTranslationButtons() {
+            const translateBtnDesktop = document.getElementById('translateBtnDesktop');
+            const translateBtnMobile = document.getElementById('translateBtnMobileToggle');
+
+            if (translateBtnDesktop) {
+                translateBtnDesktop.addEventListener('click', () => {
+                    translatePage(currentLanguage === 'es' ? 'en' : 'es');
+                });
+            }
+            if (translateBtnMobile) {
+                translateBtnMobile.addEventListener('click', () => {
+                    translatePage(currentLanguage === 'es' ? 'en' : 'es');
+                });
+            }
+            // Initialize with the current language to set button text correctly on load
+            translatePage(currentLanguage);
+        }
+
+        // Initialize all scripts once the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setCurrentYear();
+            initScrollAnimations();
+            initMobileMenu();
+            initBackToTopButton();
+            initTranslationButtons();
+        });
+    </script>
+
+</body>
+</html>
